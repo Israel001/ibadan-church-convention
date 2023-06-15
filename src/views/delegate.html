@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Convention | Delegate </title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../../vendors/feather/feather.css">
+    <link rel="stylesheet" href="../../vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="../../vendors/typicons/typicons.css">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@7.1.96/css/materialdesignicons.min.css
+    " rel="stylesheet">
+    <link rel="stylesheet" href="../../vendors/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="../../vendors/owl-carousel-2/owl.carousel.min.css">
+    <link rel="stylesheet" href="../../vendors/owl-carousel-2/owl.theme.default.min.css">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="../../css/style.css">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="../../images/favicon.png" />
+    <script>
+        const serveDelegates = <%- JSON.stringify(locals.delegates || []) %>;
+    </script>
+</head>
+
+<%- include('./partials/_body.html'); %>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+        <!-- partial:../../partials/_settings-panel.html -->
+        <!--  -->
+
+        <!-- partial -->
+        <!-- Nav section -->
+        <%- include('./partials/_sidebar.html'); %>
+        <!-- partial -->
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="row h-100 justify-content-center align-items-center">
+                    <div class="col-md-12 col-lg-10 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title text-center ">DELEGATE BIODATA FORM</h4>
+                                <p class="card-description">
+                                    <!-- Basic form layout to capture surname, firstname, middle name contact number and address -->
+                                </p>
+                                <% if (locals.successmsg) { %>
+                                    <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                                        <strong><%= successmsg %></strong>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                <% } %>
+                                <% if (locals.errormsg) { %>
+                                    <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
+                                        <strong><%= errormsg %></strong>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                <% } %>
+                                    <div id="not-reg-err" class="alert d-none alert-warning alert-dismissible fade show mt-3" role="alert">
+                                        <strong>Delegate is not registered yet</strong>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                <form class="forms-sample" method="post" action="/add-new-delegate">
+                                    <div class="form-group">
+                                        <label for="user">Search Delegate Name
+                                        </label>
+                                        <input list="delegates" id="delegate" class="form-control form-control-sm" placeholder="Search Delegate Name" name="delegate" />
+                                        <input class="form-control form-control-sm" id="did" placeholder="Search Delegate Name" style="display: none;" name="delegate_id" />
+                                        <datalist id="delegates">
+                                            <% delegates.forEach(function(delegate){ %>
+                                                <% if (delegate.middlename) { %>
+                                                    <option value="<%= delegate.surname %> <%= delegate.firstname %> <%= delegate.middlename %>" data-value="<%= delegate.id %>">
+                                                <% } else { %>
+                                                <option value="<%= delegate.surname %> <%= delegate.firstname %>" data-value="<%= delegate.id %>">
+                                                <% } %>
+                                            <% }) %>
+                                        </datalist>
+                                    </div>  
+                                    <div class="form-group">
+                                        <label for="surname">Surname <span style="color: red; font-size: 20px;">*</span></label>
+                                        <input type="text" class="form-control" id="surname" name="surname" placeholder="Enter Surname" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="firstname">First Name <span style="color: red; font-size: 20px;">*</span></label>
+                                        <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter First name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="middlename">Middle Name</label>
+                                        <input type="text" class="form-control" id="middlename" name="middlename" placeholder="Enter Middle name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone">Phone Number</label>
+                                        <input type="number" class="form-control" id="phone" name="phone" placeholder="Enter phone number">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="address">Address</label>
+                                        <input type="text" class="form-control" id="address" name="address" placeholder="Enter church address">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="city">City <span style="color: red; font-size: 20px;">*</span></label>
+                                        <input type="text" class="form-control" id="city" name="city" placeholder="Enter City" required>
+                                    </div>
+                                    <!-- states available in nigeria -->
+
+                                    <!-- Section to capture gender -->
+                                    <div class="col-md-6 col-lg-12 col-sm-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 form-label">Gender <span style="color: red; font-size: 20px;">*</span></label>
+                                            <div class="col-sm-3">
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        <input type="radio" class="form-check-input" name="gender" id="gender1" value="male" required>
+                                                        Male
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        <input type="radio" class="form-check-input" name="gender" id="gender2" value="female">
+                                                        Female
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <!-- Section to capture age group of the delegates -->
+                                    <div class="col-md-12 grid-margin stretch-card">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h4 class="card-title">Age Group <span style="color: red; font-size: 20px;">*</span></label></h4>
+                                                <!-- <p class="card-description">Checkbox and radio controls (default appearance is in primary color)</p> -->
+                                                <div class="">
+                                                    <div class="form-group">
+                                                        <div class="form-check">
+                                                            <label class="form-check-label">
+                                      <input type="radio" class="form-check-input" name="age_group" id="age_group1" value="0-12months" required>
+                                      0 to 12 Months
+                                    </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <label class="form-check-label">
+                                      <input type="radio" class="form-check-input" name="age_group" id="age_group2" value="1-6years" >
+                                      Between 1 and 6 Years
+                                    </label>
+                                                        </div>
+
+                                                        <div class="form-check">
+                                                            <label class="form-check-label">
+                                      <input type="radio" class="form-check-input" name="age_group" id="age_group5" value="7-17yeears"  >
+                                      Between 7 and 17 Years
+                                    </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <label class="form-check-label">
+                                      <input type="radio" class="form-check-input" name="age_group" id="age_group6" value="18-59years"  >
+                                      Between 18 and 59 Years
+                                    </label>
+                                                        </div>
+
+                                                        <div class="form-check">
+                                                            <label class="form-check-label">
+                                      <input type="radio" class="form-check-input" name="age_group" id="age_group7" value="60 and above"  >
+                                      Between 60 and Above
+                                    </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" id="submit-btn" class="btn btn-primary me-2">Submit</button>
+                                    <button class="btn btn-primary d-none" id="update-btn" type="button">Update</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- content-wrapper ends -->
+            <!-- partial:../../partials/_footer.html -->
+            
+            <%- include('./partials/_footer.html'); %>
+            <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="../../vendors/js/vendor.bundle.base.js"></script>
+    <script src="../../vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="../../vendors/owl-carousel-2/owl.carousel.min.js"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="../../js/off-canvas.js"></script>
+    <script src="../../js/hoverable-collapse.js"></script>
+    <script src="../../js/template.js"></script>
+    <script src="../../js/settings.js"></script>
+    <script src="../../js/todolist.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <script src="../../js/owl-carousel.js"></script>
+    <script>
+        document.getElementById("delegate").addEventListener("change", (e) => {
+            const delel = document.querySelector(`[value="${e.target.value.trim()}"]`)?.getAttribute("data-value")
+            document.getElementById("did").value = delel != undefined ? delel : "";
+            // const deleval = $('#delegates [value="' + e.target.value + '"]').data('value')
+            const dele = serveDelegates.find((v) => v.id == delel)
+            if(!dele){
+                document.getElementById("not-reg-err").classList.remove("d-none")
+                document.getElementById("firstname").value = ""
+                document.getElementById("surname").value = ""
+                document.getElementById("middlename").value = ""
+                document.getElementById("phone").value = ""
+                document.getElementById("address").value = ""
+                document.getElementById("gender1").checked = false
+                document.getElementById("gender2").checked = false
+                document.getElementById("city").value = ""
+                document.getElementById("submit-btn").classList.remove("d-none");
+                document.getElementById("update-btn").classList.add("d-none");
+                return
+            }
+            document.getElementById("not-reg-err").classList.add("d-none")
+            document.getElementById("firstname").value = dele.firstname ? dele.firstname : ""
+            document.getElementById("surname").value = dele.surname ? dele.surname : ""
+            document.getElementById("middlename").value = dele.middlename ? dele.middlename : ""
+            document.getElementById("phone").value = dele.phone ? dele.phone : ""
+            document.getElementById("address").value = dele.address ? dele.address : ""
+            if(dele.gender == 'male'){
+                document.getElementById("gender1").checked = true
+            }else{
+                document.getElementById("gender2").checked = true
+            }
+            document.getElementById("city").value = dele.city ? dele.city : ""
+            document.getElementById("submit-btn").classList.add("d-none");
+            document.getElementById("update-btn").classList.remove("d-none");
+        });
+
+        document.getElementById("update-btn").addEventListener("click", (e) => {
+            document.getElementById("submit-btn").click() 
+        });
+    </script>
+    <!-- End custom js for this page-->
+</body>
+
+</html>

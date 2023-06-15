@@ -1,0 +1,55 @@
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+  <ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link" href="/">
+        <i class="mdi mdi-home-minus-outline menu-icon"></i>
+
+        <span class="menu-title">Home</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="/add-new-church">
+        <i class="mdi mdi-account-multiple-plus menu-icon"></i>
+        <span class="menu-title">Add New Church</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="/delegate">
+        <i class="mdi mdi-account-plus menu-icon"></i>
+        <span class="menu-title">Add New Delegate</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="/convention-registration">
+        <i class="mdi mdi-account menu-icon"></i>
+        <span class="menu-title">Convention Registration</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="/reg-status">
+        <i class="mdi mdi-account-card-details menu-icon"></i>
+        <span class="menu-title">Check Registration Status</span>
+      </a>
+    </li>
+
+    <% if (locals.user) { %>
+    <li class="nav-item">
+      <a class="nav-link" href="/logout">
+        <i class="mdi mdi-logout menu-icon"></i>
+        <span class="menu-title">Log Out</span>
+      </a>
+    </li>
+    <% } else { %>
+    <li class="nav-item">
+      <a class="nav-link" href="/login">
+        <i class="mdi mdi-login menu-icon"></i>
+        <span class="menu-title">Log In</span>
+      </a>
+    </li>
+    <% } %>
+  </ul>
+</nav>
