@@ -22,12 +22,12 @@ export const addNewChurch = async (req: Request, res: Response) => {
     }
 
     const newChurch = await Church.create({
-      name,
-      address,
-      city,
-      state,
-      email,
-      phone,
+      name: name!.trim(),
+      address: address!.trim(),
+      city: city!.trim(),
+      state: state!.trim(),
+      email: email!.trim(),
+      phone: phone!.trim(),
     });
 
     const message = encodeURIComponent("Church added successfully");
@@ -84,14 +84,14 @@ export const addNewDelegate = async (req: Request, res: Response) => {
       return;
     }
     await Delegate.create({
-      surname,
-      firstname,
-      middlename,
-      phone,
-      address,
-      city,
-      gender,
-      age_group,
+      surname: surname!.trim(),
+      firstname: firstname!.trim(),
+      middlename: middlename!.trim(),
+      phone: phone!.trim(),
+      address: address!.trim(),
+      city: city!.trim(),
+      gender: gender!.trim(),
+      age_group: age_group!.trim(),
     });
     // console.log(req.body);
     // console.log(newDelegate?.toJSON());
