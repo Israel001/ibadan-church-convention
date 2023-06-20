@@ -114,6 +114,7 @@ export const conventionRegistration = async (req: Request, res: Response) => {
     status,
     disability,
     sister_with_children,
+    age_group_reg,
     // children_no,
   } = req.body;
   try {
@@ -249,7 +250,7 @@ export const conventionRegistration = async (req: Request, res: Response) => {
       const errors = [];
       const data = [];
       for (let i = 0; i < arrival_date.length; i++) {
-        const convention_year = arrival_date[i].split("-")[0];
+        const convention_year = arrival_date[i].split("-")[2];
         const cid = church_id;
         const did = delegate_id[i];
 
@@ -279,6 +280,7 @@ export const conventionRegistration = async (req: Request, res: Response) => {
           where: { delegate_id: did, convention_year },
         });
         if (!checkIfRegistered && findDelegate) {
+          await findDelegate?.update({ age_group: age_group_reg[i] });
           data.push(dt);
         }
         if (checkIfRegistered) {
@@ -302,7 +304,7 @@ export const conventionRegistration = async (req: Request, res: Response) => {
       res.redirect("/convention-registration?message=" + message);
       return;
     }
-    const convention_year = arrival_date.split("-")[0];
+    const convention_year = arrival_date.split("-")[2];
     const cid = church_id;
     const did = delegate_id;
 
@@ -326,6 +328,7 @@ export const conventionRegistration = async (req: Request, res: Response) => {
         user,
       });
 
+    await findDelegate?.update({ age_group: age_group_reg });
     const checkIfRegistered = await ConventionRegistration.findOne({
       where: { delegate_id: did, convention_year },
     });
