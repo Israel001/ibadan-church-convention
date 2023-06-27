@@ -21,6 +21,11 @@ const User = db.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    isAdmin: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
   },
   {
     timestamps: true,
@@ -28,5 +33,7 @@ const User = db.define(
     updatedAt: "updated_at",
   }
 );
+
+User.sync({ alter: true });
 
 export default User;

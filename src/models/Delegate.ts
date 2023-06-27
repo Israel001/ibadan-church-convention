@@ -1,5 +1,6 @@
 import db from "../configs/db";
 import { DataTypes } from "sequelize";
+import RegistrationCard from "./RegistrationCard";
 
 const Delegate = db.define(
   "delegates",
@@ -63,5 +64,12 @@ Delegate.hasMany(Delegate, {
   // onDelete: "CASCADE",
   // onUpdate: "CASCADE",
 });
+
+// Delegate.belongsTo(Delegate, {
+//   foreignKey: "parent_id",
+//   as: "parent",
+// });
+
+// Delegate.sync({ alter: true });
 
 export default Delegate;

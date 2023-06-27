@@ -3,6 +3,7 @@ import { Church, Delegate, User } from "../models";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
 import sendEmail from "../configs/mail";
+import path from "path";
 
 export * from "./functions";
 

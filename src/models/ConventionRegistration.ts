@@ -47,6 +47,11 @@ const ConventionRegistration = db.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    age_group: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      // unique: true,
+    },
   },
   {
     timestamps: true,
@@ -64,5 +69,7 @@ ConventionRegistration.belongsTo(Delegate, {
   foreignKey: "delegate_id",
   as: "delegate",
 });
+
+ConventionRegistration.sync({ alter: true });
 
 export default ConventionRegistration;

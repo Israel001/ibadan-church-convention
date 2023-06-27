@@ -61,4 +61,12 @@ export const isNotLoggedIn = (
   res.redirect("/");
 };
 
+export const isAdmin = (req: Request, res: Response, next: NextFunction) => {
+  //@ts-ignore
+  if (req.isAuthenticated() && req.user?.isAdmin) {
+    return next();
+  }
+  res.redirect("/");
+};
+
 export default passport;

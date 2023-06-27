@@ -1,5 +1,6 @@
 import express from "express";
 import passport from "passport";
+import { crud } from "express-crud-router";
 import { isLoggedIn, isNotLoggedIn } from "../configs/passport";
 import {
   addNewChurch,
@@ -21,6 +22,9 @@ import {
   resetPassword,
   resetPasswordPage,
 } from "../services";
+import sequelizeCrud from "../services/admin";
+import { Church, ConventionRegistration, Delegate } from "../models";
+import RegistrationCard from "../models/RegistrationCard";
 
 const router = express.Router();
 
@@ -55,6 +59,16 @@ router.post("/add-new-delegate", isLoggedIn, addNewDelegate);
 router.post("/convention-registration", isLoggedIn, conventionRegistration);
 router.post("/reg-status", isLoggedIn, regStatus);
 
+//@ts-ignore
+router.use(crud("/api/churches", sequelizeCrud(Church)));
+//@ts-ignore
+router.use(crud("/api/delegates", sequelizeCrud(Delegate)));
+router.use(
+  //@ts-ignore
+  crud("/api/convention-registrations", sequelizeCrud(ConventionRegistration))
+);
+//@ts-ignore
+router.use(crud("/api/registration-cards", sequelizeCrud(RegistrationCard)));
 router.use("*", pageNotFound);
 
 export default router;

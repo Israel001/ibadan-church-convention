@@ -592,10 +592,18 @@
                                                                                 <p class="dark-text"><%= conventionReg.delegate?.surname %> <%= conventionReg.delegate?.firstname %> <%= conventionReg.delegate?.middlename %></p>
                                                                             </td>
                                                                             <td align="center">
-                                                                                <p class="dark-text">Faith Hall</p>
+                                                                                <% if(conventionReg.delegate?.registration_cards[0]){ %>
+                                                                                <p class="dark-text"><%= conventionReg.delegate?.registration_cards[0].hall %></p>
+                                                                                <% }else{ %>
+                                                                                <p class="dark-text">Not Assigned</p>
+                                                                                <% } %>
                                                                             </td>
                                                                             <td align="center">
-                                                                                <p class="dark-text">04</p>
+                                                                                <% if(conventionReg.delegate?.registration_cards[0]){ %>
+                                                                                <p class="dark-text"><%= conventionReg.delegate?.registration_cards[0].room_no %></p>
+                                                                                <% }else{ %>
+                                                                                <p class="dark-text">Not Assigned</p>
+                                                                                <% } %>
                                                                             </td>
                                                                             <td align="center">
                                                                                 <p class="dark-text" role="button" data-toggle="modal" data-target="#Modal<%= conventionReg.id %>">Display Registration Card</p>
@@ -625,14 +633,25 @@
                                                                                                     <div> Registration No.: </div>
                                                                                                     <div><%= conventionReg.id %></div>
                                                                                                 </div>
+                                                                                                <% if(conventionReg.delegate?.registration_cards[0]){ %>
                                                                                                 <div class="d-flex justify-content-between align-items-center w-75 mb-2">
                                                                                                     <div> Hall: </div>
-                                                                                                    <div>Faith Hall</div>
+                                                                                                    <div><%= conventionReg.delegate?.registration_cards[0].hall %></div>
                                                                                                 </div>
                                                                                                 <div class="d-flex justify-content-between align-items-center w-75 mb-2">
                                                                                                     <div> Room No.: </div>
-                                                                                                    <div>[None]</div>
+                                                                                                    <div><%= conventionReg.delegate?.registration_cards[0].room_no %></div>
                                                                                                 </div>
+                                                                                                <% }else{ %>
+                                                                                                <div class="d-flex justify-content-between align-items-center w-75 mb-2">
+                                                                                                    <div> Hall: </div>
+                                                                                                    <div>Not yet assigned</div>
+                                                                                                </div>
+                                                                                                <div class="d-flex justify-content-between align-items-center w-75 mb-2">
+                                                                                                    <div> Room No.: </div>
+                                                                                                    <div>Not yet assigned</div>
+                                                                                                </div>
+                                                                                                <% } %>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
@@ -656,10 +675,18 @@
                                                                                 <p class="dark-text"><%= i+1 %>: <%= child?.surname %> <%= child?.firstname %> <%= child?.middlename %></p>
                                                                             </td>
                                                                             <td align="center">
-                                                                                <p class="dark-text">Faith Hall</p>
+                                                                                <% if(child?.registration_cards[0]){ %>
+                                                                                <p class="dark-text"><%= child?.registration_cards[0].hall %></p>
+                                                                                <% }else{ %>
+                                                                                <p class="dark-text">Not Assigned</p>
+                                                                                <% } %>
                                                                             </td>
                                                                             <td align="center">
-                                                                                <p class="dark-text">04</p>
+                                                                                <% if(child?.registration_cards[0]){ %>
+                                                                                <p class="dark-text"><%= child?.registration_cards[0].room_no %></p>
+                                                                                <% }else{ %>
+                                                                                <p class="dark-text">Not Assigned</p>
+                                                                                <% } %>
                                                                             </td>
                                                                             <td align="center">
                                                                                 <p class="dark-text" role="button" data-toggle="modal" data-target="#Modal<%= conventionReg.id %>">Display Registration Card</p>
@@ -689,14 +716,25 @@
                                                                                                     <div> Registration No.: </div>
                                                                                                     <div><%= conventionReg.id %></div>
                                                                                                 </div>
+                                                                                            <% if(child?.registration_cards[0]){ %>
                                                                                                 <div class="d-flex justify-content-between align-items-center w-75 mb-2">
                                                                                                     <div> Hall: </div>
-                                                                                                    <div>Faith Hall</div>
+                                                                                                    <div><%= child?.registration_cards[0].hall %></div>
                                                                                                 </div>
                                                                                                 <div class="d-flex justify-content-between align-items-center w-75 mb-2">
                                                                                                     <div> Room No.: </div>
-                                                                                                    <div>[None]</div>
+                                                                                                    <div><%= child?.registration_cards[0].room_no %></div>
                                                                                                 </div>
+                                                                                                <% }else{ %>
+                                                                                                <div class="d-flex justify-content-between align-items-center w-75 mb-2">
+                                                                                                    <div> Hall: </div>
+                                                                                                    <div>Not yet assigned</div>
+                                                                                                </div>
+                                                                                                <div class="d-flex justify-content-between align-items-center w-75 mb-2">
+                                                                                                    <div> Room No.: </div>
+                                                                                                    <div>Not yet assigned</div>
+                                                                                                </div>
+                                                                                                <% } %>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
@@ -793,10 +831,18 @@
                                                                                 <p class="dark-text"><%= conventionReg.delegate?.surname %> <%= conventionReg.delegate?.firstname %> <%= conventionReg.delegate?.middlename %></p>
                                                                             </td>
                                                                             <td align="center">
-                                                                                <p class="dark-text">Faith Hall</p>
+                                                                                <% if(conventionReg.delegate?.registration_cards[0]){ %>
+                                                                                <p class="dark-text"><%= conventionReg.delegate?.registration_cards[0].hall %></p>
+                                                                                <% }else{ %>
+                                                                                <p class="dark-text">Not Assigned</p>
+                                                                                <% } %>
                                                                             </td>
                                                                             <td align="center">
-                                                                                <p class="dark-text">04</p>
+                                                                                <% if(conventionReg.delegate?.registration_cards[0]){ %>
+                                                                                <p class="dark-text"><%= conventionReg.delegate?.registration_cards[0].room_no %></p>
+                                                                                <% }else{ %>
+                                                                                <p class="dark-text">Not Assigned</p>
+                                                                                <% } %>
                                                                             </td>
                                                                             <td align="center">
                                                                                 <p class="dark-text" role="button" data-toggle="modal" data-target="#Modal<%= conventionReg.id %>">Display Registration Card</p>
@@ -825,14 +871,25 @@
                                                                                                     <div> Registration No.: </div>
                                                                                                     <div><%= conventionReg.id %></div>
                                                                                                 </div>
+                                                                                                <% if(conventionReg.delegate?.registration_cards[0]){ %>
                                                                                                 <div class="d-flex justify-content-between align-items-center w-75 mb-2">
                                                                                                     <div> Hall: </div>
-                                                                                                    <div>Faith Hall</div>
+                                                                                                    <div><%= conventionReg.delegate?.registration_cards[0].hall %></div>
                                                                                                 </div>
                                                                                                 <div class="d-flex justify-content-between align-items-center w-75 mb-2">
                                                                                                     <div> Room No.: </div>
-                                                                                                    <div>[None]</div>
+                                                                                                    <div><%= conventionReg.delegate?.registration_cards[0].room_no %></div>
                                                                                                 </div>
+                                                                                                <% }else{ %>
+                                                                                                <div class="d-flex justify-content-between align-items-center w-75 mb-2">
+                                                                                                    <div> Hall: </div>
+                                                                                                    <div>Not yet assigned</div>
+                                                                                                </div>
+                                                                                                <div class="d-flex justify-content-between align-items-center w-75 mb-2">
+                                                                                                    <div> Room No.: </div>
+                                                                                                    <div>Not yet assigned</div>
+                                                                                                </div>
+                                                                                                <% } %>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
@@ -856,10 +913,18 @@
                                                                                 <p class="dark-text"><%= i+1 %>: <%= child?.surname %> <%= child?.firstname %> <%= child?.middlename %></p>
                                                                             </td>
                                                                             <td align="center">
-                                                                                <p class="dark-text">Faith Hall</p>
+                                                                                <% if(child?.registration_cards[0]){ %>
+                                                                                <p class="dark-text"><%= child?.registration_cards[0].hall %></p>
+                                                                                <% }else{ %>
+                                                                                <p class="dark-text">Not Assigned</p>
+                                                                                <% } %>
                                                                             </td>
                                                                             <td align="center">
-                                                                                <p class="dark-text">04</p>
+                                                                                <% if(child?.registration_cards[0]){ %>
+                                                                                <p class="dark-text"><%= child?.registration_cards[0].room_no %></p>
+                                                                                <% }else{ %>
+                                                                                <p class="dark-text">Not Assigned</p>
+                                                                                <% } %>
                                                                             </td>
                                                                             <td align="center">
                                                                                 <p class="dark-text" role="button" data-toggle="modal" data-target="#Modal<%= conventionReg.id %>">Display Registration Card</p>
@@ -889,14 +954,25 @@
                                                                                                     <div> Registration No.: </div>
                                                                                                     <div><%= conventionReg.id %></div>
                                                                                                 </div>
+                                                                                                <% if(child?.registration_cards[0]){ %>
                                                                                                 <div class="d-flex justify-content-between align-items-center w-75 mb-2">
                                                                                                     <div> Hall: </div>
-                                                                                                    <div>Faith Hall</div>
+                                                                                                    <div><%= child?.registration_cards[0].hall %></div>
                                                                                                 </div>
                                                                                                 <div class="d-flex justify-content-between align-items-center w-75 mb-2">
                                                                                                     <div> Room No.: </div>
-                                                                                                    <div>[None]</div>
+                                                                                                    <div><%= child?.registration_cards[0].room_no %></div>
                                                                                                 </div>
+                                                                                                <% }else{ %>
+                                                                                                <div class="d-flex justify-content-between align-items-center w-75 mb-2">
+                                                                                                    <div> Hall: </div>
+                                                                                                    <div>Not yet assigned</div>
+                                                                                                </div>
+                                                                                                <div class="d-flex justify-content-between align-items-center w-75 mb-2">
+                                                                                                    <div> Room No.: </div>
+                                                                                                    <div>Not yet assigned</div>
+                                                                                                </div>
+                                                                                                <% } %>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>

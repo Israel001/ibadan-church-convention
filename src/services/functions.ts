@@ -1,5 +1,6 @@
 import e, { Request, Response } from "express";
 import { Church, ConventionRegistration, Delegate } from "../models";
+import RegistrationCard from "../models/RegistrationCard";
 
 export const addNewChurch = async (req: Request, res: Response) => {
   const { name, address, city, state, email, phone, church_id } = req.body;
@@ -274,6 +275,7 @@ export const conventionRegistration = async (req: Request, res: Response) => {
           status: status[i],
           disability: disability[i],
           sister_with_children: sister_with_children[i],
+          age_group: age_group_reg[i],
           convention_year: convention_year,
         };
         const checkIfRegistered = await ConventionRegistration.findOne({
@@ -342,6 +344,33 @@ export const conventionRegistration = async (req: Request, res: Response) => {
       });
     }
 
+    const delegateChildren = await Delegate.findAll({
+      where: { parent_id: did },
+    });
+
+    if (delegateChildren.length > 0) {
+      const children: any = [];
+      delegateChildren.forEach((child) => {
+        const el = {
+          church_id: cid,
+          //@ts-ignore
+          delegate_id: child.id,
+          church_name,
+          //@ts-ignore
+          delegate_name: `${child.surname} ${child.firstname} ${child.middlename}`,
+          arrival_date,
+          status,
+          disability,
+          sister_with_children,
+          convention_year,
+          //@ts-ignore
+          age_group: child.age_group,
+        };
+        children.push(el);
+      });
+      await ConventionRegistration.bulkCreate(children);
+    }
+
     await ConventionRegistration.create({
       church_id: cid,
       delegate_id: did,
@@ -352,7 +381,9 @@ export const conventionRegistration = async (req: Request, res: Response) => {
       disability,
       sister_with_children,
       convention_year,
+      age_group: age_group_reg,
     });
+
     // console.log(newConventionRegistration?.toJSON());
     const message = encodeURIComponent("Registration successful");
     res.redirect("/convention-registration?message=" + message);
@@ -422,9 +453,19 @@ export const regStatus = async (req: Request, res: Response) => {
           {
             model: Delegate,
             as: "delegate",
-            include:
+            include: [
               //@ts-ignore
-              { model: Delegate, as: "children" },
+              {
+                model: Delegate,
+                as: "children",
+                include: {
+                  //@ts-ignore
+                  model: RegistrationCard,
+                  as: "registration_cards",
+                },
+              },
+              { model: RegistrationCard, as: "registration_cards" },
+            ],
           },
           { model: Church, as: "church" },
         ],
@@ -450,7 +491,19 @@ export const regStatus = async (req: Request, res: Response) => {
             model: Delegate,
             as: "delegate",
             //@ts-ignore
-            include: { model: Delegate, as: "children" },
+            include: [
+              //@ts-ignore
+              {
+                model: Delegate,
+                as: "children",
+                include: {
+                  //@ts-ignore
+                  model: RegistrationCard,
+                  as: "registration_cards",
+                },
+              },
+              { model: RegistrationCard, as: "registration_cards" },
+            ],
           },
           { model: Church, as: "church" },
         ],
