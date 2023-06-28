@@ -197,6 +197,7 @@ export const conventionRegistration = async (req: Request, res: Response) => {
       let dlData = delegate.toJSON();
       const children = [];
       const toUpdateChildren = [];
+      const convention_year = arrival_date.split("-")[2];
       for (let itr = 0; itr < children_no; itr++) {
         if (children_no == 1) {
           const el = {
@@ -244,6 +245,66 @@ export const conventionRegistration = async (req: Request, res: Response) => {
       toUpdateChildren.forEach(async (child) => {
         await Delegate.update(child, { where: { id: child.id } });
       });
+
+      const delegateChildren = await Delegate.findAll({
+        where: { parent_id: delegate_id },
+      });
+
+      if (delegateChildren.length > 0) {
+        const childrenTobeReg: any = [];
+        const mergedChildren: any = [...children, ...toUpdateChildren];
+        // const noMoreChildren = [];
+        const errors = [];
+        for (let i = 0; i < delegateChildren.length; i++) {
+          const el = {
+            church_id: church_id,
+            //@ts-ignore
+            delegate_id: delegateChildren[i].id,
+            church_name,
+            //@ts-ignore
+            delegate_name: `${delegateChildren[i].surname} ${delegateChildren[i].firstname} ${delegateChildren[i].middlename}`,
+            arrival_date,
+            status,
+            disability,
+            sister_with_children,
+            convention_year,
+            //@ts-ignore
+            age_group: delegateChildren[i].age_group,
+            parent_id: delegate_id,
+          };
+          const checkIfRegistered = await ConventionRegistration.findOne({
+            //@ts-ignore
+            where: { delegate_id: delegateChildren[i].id, convention_year },
+          });
+          const mergedChild = mergedChildren.find(
+            //@ts-ignore
+            (dt) =>
+              `${dt.surname} ${dt.firstname} ${dt.middlename}` ==
+              el.delegate_name
+          );
+          if (!checkIfRegistered && mergedChild) {
+            childrenTobeReg.push(el);
+          } else {
+            const noMoreChild = {
+              ...delegateChildren[i].toJSON(),
+              parent_id: null,
+            };
+            await Delegate.update(noMoreChild, {
+              //@ts-ignore
+              where: { id: delegateChildren[i].id },
+            });
+          }
+          if (checkIfRegistered) {
+            errors.push(
+              //@ts-ignore
+              `${el.delegate_name} has already been registered for convention ${convention_year}`
+            );
+          }
+        }
+        if (childrenTobeReg.length > 0) {
+          await ConventionRegistration.bulkCreate(childrenTobeReg);
+        }
+      }
       // console.log(children, toUpdateChildren);
     }
 
@@ -342,33 +403,6 @@ export const conventionRegistration = async (req: Request, res: Response) => {
         churches,
         user,
       });
-    }
-
-    const delegateChildren = await Delegate.findAll({
-      where: { parent_id: did },
-    });
-
-    if (delegateChildren.length > 0) {
-      const children: any = [];
-      delegateChildren.forEach((child) => {
-        const el = {
-          church_id: cid,
-          //@ts-ignore
-          delegate_id: child.id,
-          church_name,
-          //@ts-ignore
-          delegate_name: `${child.surname} ${child.firstname} ${child.middlename}`,
-          arrival_date,
-          status,
-          disability,
-          sister_with_children,
-          convention_year,
-          //@ts-ignore
-          age_group: child.age_group,
-        };
-        children.push(el);
-      });
-      await ConventionRegistration.bulkCreate(children);
     }
 
     await ConventionRegistration.create({

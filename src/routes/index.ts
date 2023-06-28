@@ -23,7 +23,7 @@ import {
   resetPasswordPage,
 } from "../services";
 import sequelizeCrud from "../services/admin";
-import { Church, ConventionRegistration, Delegate } from "../models";
+import { Church, ConventionRegistration, Delegate, User } from "../models";
 import RegistrationCard from "../models/RegistrationCard";
 
 const router = express.Router();
@@ -58,7 +58,8 @@ router.post("/add-new-church", isLoggedIn, addNewChurch);
 router.post("/add-new-delegate", isLoggedIn, addNewDelegate);
 router.post("/convention-registration", isLoggedIn, conventionRegistration);
 router.post("/reg-status", isLoggedIn, regStatus);
-
+//@ts-ignore
+router.use(crud("/api/users", sequelizeCrud(User)));
 //@ts-ignore
 router.use(crud("/api/churches", sequelizeCrud(Church)));
 //@ts-ignore

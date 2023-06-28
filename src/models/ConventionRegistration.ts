@@ -52,6 +52,9 @@ const ConventionRegistration = db.define(
       allowNull: false,
       // unique: true,
     },
+    parent_id: {
+      type: DataTypes.INTEGER,
+    },
   },
   {
     timestamps: true,
@@ -68,6 +71,11 @@ ConventionRegistration.belongsTo(Church, {
 ConventionRegistration.belongsTo(Delegate, {
   foreignKey: "delegate_id",
   as: "delegate",
+});
+
+ConventionRegistration.belongsTo(Delegate, {
+  foreignKey: "parent_id",
+  as: "parent",
 });
 
 ConventionRegistration.sync({ alter: true });

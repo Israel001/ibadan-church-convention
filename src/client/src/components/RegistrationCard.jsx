@@ -12,6 +12,7 @@ import {
   TextInput,
   SelectInput,
   Create,
+  NumberInput,
 } from "react-admin";
 
 export const RegistrationCardList = () => (
@@ -40,14 +41,14 @@ const optionRenderer = (choice) =>
 export const RegistrationCardEdit = () => (
   <Edit>
     <SimpleForm>
-      <TextInput source="id" />
+      <TextInput source="id" disabled />
       <TextInput source="delegate_name" />
       <ReferenceInput source="delegate_id" reference="delegates">
         <SelectInput optionText={optionRenderer} />
       </ReferenceInput>
       <TextInput source="registration_no" />
       <TextInput source="hall" />
-      <DateInput source="room_no" />
+      <NumberInput source="room_no" />
       <DateInput source="convention_year" />
       <DateInput source="created_at" />
       <DateInput source="updated_at" />
@@ -65,7 +66,7 @@ export const RegistrationCardCreate = () => (
       </ReferenceInput>
       <TextInput source="registration_no" />
       <TextInput source="hall" />
-      <DateInput source="room_no" />
+      <NumberInput source="room_no" />
       <DateInput source="convention_year" />
       <DateInput source="created_at" />
       <DateInput source="updated_at" />

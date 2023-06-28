@@ -18,6 +18,7 @@ import {
   RegistrationCardEdit,
   RegistrationCardList,
 } from "./components/RegistrationCard";
+import { UserEdit, UserList } from "./components/User";
 
 const environment = import.meta.env.MODE;
 console.log("environment", environment);
@@ -55,6 +56,7 @@ const App = () => (
       create={RegistrationCardCreate}
       show={ShowGuesser}
     />
+    <Resource name="users" list={UserList} edit={UserEdit} show={ShowGuesser} />
   </Admin>
 );
 
