@@ -1,6 +1,6 @@
 import path from "path";
 import * as dotenv from "dotenv";
-dotenv.config({ path: ".env" });
+dotenv.config({ path: "config.env" });
 
 import express, { Application, Request, Response } from "express";
 import session from "express-session";
