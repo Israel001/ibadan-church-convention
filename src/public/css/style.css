@@ -20404,7 +20404,7 @@ body,
 html {
   overflow-x: hidden;
   padding-right: 0 !important;
-  background: #F4F5F7;
+  background: #FFFFFF;
 }
 
 *:-moz-full-screen,
@@ -31424,24 +31424,20 @@ div.tagsinput span.tag a {
 /* === Landing screens === */
 /* Auth */
 .auth .forgot-half-bg {
-  background: url("../images/auth/forgot-bg.jpg");
+  background: url("../images/auth/forgot.jpg");
   background-size: cover;
 }
 
 .auth .login-half-bg {
-  background: url("../images/auth/login-bg.jpg");
+  background: url("../images/auth/log.jpg");
   background-size: cover;
 }
 
 .auth .register-half-bg {
-  background: url("../images/auth/register-bg.jpg");
+  background: url("../images/auth/register.jpg");
   background-size: cover;
 }
 
-.auth.lock-full-bg {
-  background: url("../images/auth/lockscreen-bg.jpg");
-  background-size: cover;
-}
 
 .auth .lock-profile-img {
   width: 90px;
@@ -31454,8 +31450,9 @@ div.tagsinput span.tag a {
 }
 
 .auth .auth-form-light select {
-  color: #c9c8c8;
+  color: #ffffff;
 }
+
 
 .auth .auth-form-light .input-group .form-control:focus, .auth .auth-form-light .asColorPicker-wrap .form-control:focus, .auth .auth-form-light .input-group .asColorPicker-input:focus, .auth .auth-form-light .asColorPicker-wrap .asColorPicker-input:focus, .auth .auth-form-light .input-group .dataTables_wrapper select:focus, .dataTables_wrapper .auth .auth-form-light .input-group select:focus, .auth .auth-form-light .asColorPicker-wrap .dataTables_wrapper select:focus, .dataTables_wrapper .auth .auth-form-light .asColorPicker-wrap select:focus, .auth .auth-form-light .input-group .jsgrid .jsgrid-table .jsgrid-filter-row input:focus[type=text], .jsgrid .jsgrid-table .jsgrid-filter-row .auth .auth-form-light .input-group input:focus[type=text], .auth .auth-form-light .asColorPicker-wrap .jsgrid .jsgrid-table .jsgrid-filter-row input:focus[type=text], .jsgrid .jsgrid-table .jsgrid-filter-row .auth .auth-form-light .asColorPicker-wrap input:focus[type=text],
 .auth .auth-form-light .input-group .jsgrid .jsgrid-table .jsgrid-filter-row select:focus, .jsgrid .jsgrid-table .jsgrid-filter-row .auth .auth-form-light .input-group select:focus,
