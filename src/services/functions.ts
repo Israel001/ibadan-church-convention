@@ -242,9 +242,11 @@ export const conventionRegistration = async (req: Request, res: Response) => {
         }
       }
       await Delegate.bulkCreate(children);
-      toUpdateChildren.forEach(async (child) => {
-        await Delegate.update(child, { where: { id: child.id } });
-      });
+      for (let j = 0; j < toUpdateChildren.length; j++) {
+        await Delegate.update(toUpdateChildren[j], {
+          where: { id: toUpdateChildren[j].id },
+        });
+      }
 
       const delegateChildren = await Delegate.findAll({
         where: { parent_id: delegate_id },
@@ -301,6 +303,7 @@ export const conventionRegistration = async (req: Request, res: Response) => {
             );
           }
         }
+        console.log(childrenTobeReg);
         if (childrenTobeReg.length > 0) {
           await ConventionRegistration.bulkCreate(childrenTobeReg);
         }
