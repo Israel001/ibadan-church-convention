@@ -7,6 +7,12 @@ const port: number = parseInt(process.env.DB_PORT || "3306");
 const database: string = process.env.DB_NAME || "cbt-db";
 const dbconnection: Dialect = (process.env.DB_CONNECTION as Dialect) || "mysql";
 
+console.log(database);
+console.log(user);
+console.log(password);
+console.log(host);
+console.log(port);
+
 const sequelize = new Sequelize(database, user, password, {
   host,
   port,

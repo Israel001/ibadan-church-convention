@@ -4,3 +4,4 @@ npm-debug.log
 package-lock.json
 .vscode
 src/client/node_modules
+.env

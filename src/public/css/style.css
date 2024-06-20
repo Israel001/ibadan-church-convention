@@ -31438,6 +31438,10 @@ div.tagsinput span.tag a {
   background-size: cover;
 }
 
+.auth .lock-half-bg {
+  background: url("../images/auth/register.jpg");
+  background-size: cover;
+}
 
 .auth .lock-profile-img {
   width: 90px;

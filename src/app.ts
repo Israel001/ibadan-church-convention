@@ -1,6 +1,6 @@
 import path from "path";
 import * as dotenv from "dotenv";
-dotenv.config({ path: "config.env" });
+dotenv.config();
 
 import express, { Application, Request, Response } from "express";
 import session from "express-session";
@@ -9,6 +9,7 @@ import cors from "cors";
 
 import router from "./routes/index";
 import "./configs/db";
+import util from 'util';
 
 const app: Application = express();
 const PORT = process.env.PORT || 3030;
@@ -48,4 +49,12 @@ app.use(router);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
+});
+
+app.use((err: Error) => {
+  console.error(`Error: ${err.stack}`);
+});
+
+process.on('unhandledRejection', (error) => {
+  console.log('Unhandled Promise Rejection:', util.inspect(error, false, null, true));
 });
