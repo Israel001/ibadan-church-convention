@@ -21,11 +21,9 @@ import {
 import { UserEdit, UserList } from "./components/User";
 
 const environment = import.meta.env.MODE;
+const HOST = import.meta.env.VITE_HOST_URL;
 console.log("environment", environment);
-const apiUrl =
-  environment === "development"
-    ? "http://localhost:2000/api"
-    : `${location.origin}/api`;
+const apiUrl = `${HOST}/api`;
 const dataProvider = jsonServerProvider(apiUrl);
 
 const App = () => (
