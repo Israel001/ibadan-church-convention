@@ -368,7 +368,7 @@
             </div>
             <ul class="navbar-nav">
                 <li class="nav-item font-weight-semibold d-none d-lg-block ms-0 row h-100 justify-content-left align-items-left">
-                    <h1 class="convention-text">Belivers Convention <span style="color:#8D8D8D">2023</span class="welcome-text"> Ibadan</h1>
+                    <h1 class="convention-text">Believers' Convention <span style="color:#8D8D8D" id="year"> </span class="welcome-text"> Ibadan</h1>
                 </li>
             </ul>
         
@@ -1091,6 +1091,7 @@
     <!-- Custom js for this page-->
     <script src="../../js/wizard.js"></script>
     <script>
+        document.getElementById("year").innerHTML = new Date().getFullYear();
         // <tr id="data-${no}">
         const thecolumns = (no) => `
                 <td align="center" style="font-family: sans-serif;">
