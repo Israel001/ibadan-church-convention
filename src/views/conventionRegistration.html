@@ -44,7 +44,7 @@
     <!-- endinject -->
     <link href="../../images/favicon.png" rel="shortcut icon">
     <script>
-        const startDate = '10-08-2023';
+        const startDate = '08-08-2024';
         const serveDelegates = <%- JSON.stringify(locals.delegates || []) %>;
     </script>
 </head>
@@ -529,7 +529,7 @@
                                                             <input class="form-control form-control-sm" id="did" placeholder="Search Delegate Name" style="display: none;" name="delegate_id" />
                                                             <datalist id="delegates">
                                                                 <% delegates.forEach(function(delegate){ %>
-                                                                <% if (delegate.middlename) { %>
+                                                                <% if (delegate.middlename.trim().length) { %>
                                                                     <option value="<%= delegate.surname %> <%= delegate.firstname %> <%= delegate.middlename %>" data-value="<%= delegate.id %>">
                                                                 <% } else { %>
                                                                 <option value="<%= delegate.surname %> <%= delegate.firstname %>" data-value="<%= delegate.id %>">
@@ -557,7 +557,7 @@
                                                             <label for="arrival_date">Choose date of arrival
                                                             </label>
                                                             <div class="input-group date" id="datepicker">
-                                                                <input class="form-control datepicker" type="text" id="arrival_date" name="arrival_date" placeholder="dd/mm/yyyy" value="03/08/2023">
+                                                                <input class="form-control datepicker" type="text" id="arrival_date" name="arrival_date" placeholder="dd/mm/yyyy" value="08/08/2024">
                                                                 <span class="input-group-addon input-group-append border-left">
                                                                     <span class="ti-calendar input-group-text"></span>
                                                                 </span>
