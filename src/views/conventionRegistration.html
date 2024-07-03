@@ -46,7 +46,6 @@
     <script>
         const startDate = '08-08-2024';
         const serveDelegates = <%- JSON.stringify(locals.delegates || []) %>;
-        console.log("serveDelegates", serveDelegates);
     </script>
 </head>
 
@@ -1073,8 +1072,6 @@
             const fullName = `${delegate.surname} ${delegate.firstname} ${delegate.middlename}`.toLowerCase().trim();
             return fullName.startsWith(query);
         });
-
-        console.log("filteredDelegates", filteredDelegates);
 
         if (filteredDelegates.length) {
             errorMsg.classList.add('d-none');
