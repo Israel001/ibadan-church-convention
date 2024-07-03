@@ -46,6 +46,7 @@
     <script>
         const startDate = '08-08-2024';
         const serveDelegates = <%- JSON.stringify(locals.delegates || []) %>;
+        console.log("serveDelegates", serveDelegates);
     </script>
 </head>
 
@@ -345,6 +346,7 @@
             }
         });
     });
+
 </script>
 
 <body>
@@ -521,7 +523,7 @@
 
                                                     <form class="forms-sample" method="post" action="/convention-registration">
 
-                                                        <div class="form-group">
+                                                        <!-- <div class="form-group">
                                                             <label for="user">Search Delegate Name
                                                             </label>
                                                             <input list="delegates" id="delegate" class="form-control form-control-sm" placeholder="Search Delegate Name" name="delegate" />
@@ -536,8 +538,14 @@
                                                                 <% } %>
                                                                 <% }) %>
                                                             </datalist>
+                                                        </div> -->
+                                                        <div class="form-group">
+                                                            <label for="user">Search Delegate Name</label>
+                                                            <input list="newdelegates" id="newdelegate" class="form-control form-control-sm" placeholder="Search Delegate Name" name="delegate" />
+                                                            <span class="text-danger d-none" id="error-msg-deli">Delegate not found!</span>
+                                                            <input class="form-control form-control-sm" id="did" placeholder="Search Delegate Name" style="display: none;" name="delegate_id" />
+                                                            <datalist id="newdelegates"></datalist>
                                                         </div>
-
 
                                                         <div class="form-group">
                                                             <label for="church">Click to select Church
@@ -1052,7 +1060,39 @@
                         }
                     </script>
 
+<script>
+    const inputField = document.getElementById('newdelegate');
+    const dataList = document.getElementById('newdelegates');
+    const errorMsg = document.getElementById('error-msg-deli');
 
+    inputField.addEventListener('input', function() {
+        const query = this.value.toLowerCase();
+        dataList.innerHTML = ''; // Clear previous results
+
+        const filteredDelegates = serveDelegates.filter(delegate => {
+            const fullName = `${delegate.surname} ${delegate.firstname} ${delegate.middlename}`.toLowerCase().trim();
+            return fullName.startsWith(query);
+        });
+
+        console.log("filteredDelegates", filteredDelegates);
+
+        if (filteredDelegates.length) {
+            errorMsg.classList.add('d-none');
+            filteredDelegates.forEach(delegate => {
+                const option = document.createElement('option');
+                option.value = delegate.middlename.trim().length ? 
+                    `${delegate.surname} ${delegate.firstname} ${delegate.middlename}` : 
+                    `${delegate.surname} ${delegate.firstname}`;
+                option.dataset.value = delegate.id;
+                dataList.appendChild(option);
+            });
+            dataList.classList.remove('d-none');
+        } else {
+            errorMsg.classList.remove('d-none');
+            dataList.classList.add('d-none');
+        }
+    });
+</script>
 
                 </div>
                 <!-- content-wrapper ends -->
