@@ -5,3 +5,4 @@ package-lock.json
 .vscode
 src/client/node_modules
 .env
+*.zip
