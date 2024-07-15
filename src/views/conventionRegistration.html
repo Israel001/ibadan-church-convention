@@ -523,13 +523,12 @@
 
                                                     <form class="forms-sample" method="post" action="/convention-registration">
 
-        
                                                         <div class="form-group">
                                                             <label for="user">Search Delegate Name</label>
-                                                            <input list="newdelegates" id="newdelegate" class="form-control form-control-sm" placeholder="Search Delegate Name" name="delegate" />
-                                                            <span class="text-danger d-none" id="error-msg-deli">Delegate not found!</span>
+                                                            <input list="delegates" id="delegate" class="form-control form-control-sm" placeholder="Search Delegate Name" name="delegate" />
+                                                            <span class="text-danger d-none" id="error-msg-del">Delegate not found!</span>
                                                             <input class="form-control form-control-sm" id="did" placeholder="Search Delegate Name" style="display: none;" name="delegate_id" />
-                                                            <datalist id="newdelegates">
+                                                            <datalist id="delegates">
                                                                 <% delegates.forEach(function(delegate){ %>
                                                                 <% if (delegate.middlename && delegate.middlename.trim().length) { %>
                                                                     <option value="<%= delegate.surname %> <%= delegate.firstname %> <%= delegate.middlename %>" data-value="<%= delegate.id %>">
@@ -554,10 +553,10 @@
                                                         </div> -->
                                                         <div class="form-group">
                                                             <label for="church">Click to select Church</label>
-                                                            <input list="newchurches" id="newchurch" class="form-control form-control-sm" placeholder="Select Church" name="church" />
-                                                            <span class="text-danger d-none" id="error-msg-ch">Church not registered!</span>
+                                                            <input list="churches" id="church" class="form-control form-control-sm" placeholder="Select Church" name="church" />
                                                             <input class="form-control form-control-sm" id="cid1" style="display: none;" name="church_id" required />
-                                                            <datalist id="newchurches">
+                                                            <span class="text-danger d-none" id="error-msg-ch">Church not registered!</span>
+                                                            <datalist id="churches">
                                                                 <% churches.forEach(function(church){ %>
                                                                 <option value="<%= church.name %> <%= church.city %>" data-value="<%= church.id %>">
                                                                 <% }) %>
@@ -1065,33 +1064,33 @@
                     </script>
 
 <script>
-    const inputField = document.getElementById('newdelegate');
-    const dataList = document.getElementById('newdelegates');
-    const errorMsg = document.getElementById('error-msg-deli');
+    const inputField = document.getElementById('delegate');
+    const dataList = document.getElementById('delegates');
+    const errorMsg = document.getElementById('error-msg-del');
 
-    const churchInputField = document.getElementById('newchurch');
-    const churchDataList = document.getElementById('newchurches');
+    const churchInputField = document.getElementById('church');
+    const churchDataList = document.getElementById('churches');
     const churchErrorMsg = document.getElementById('error-msg-ch');
 
-    churchInputField.addEventListener('input', () => {
+    churchInputField.addEventListener('input', function () {
         const query = this.value.toLowerCase();
-        dataList.innerHTML = '';
+        churchDataList.innerHTML = '';
         const filteredChurches = serveChurches.filter(church => {
             const churchName = `${church.name} ${church.city}`.toLowerCase().trim();
             return churchName.startsWith(query) || query.split(' ').every((q) => churchName.includes(q));
         });
         if (filteredChurches.length) {
-            errorMsg.classList.add('d-none');
+            churchErrorMsg.classList.add('d-none');
             filteredChurches.forEach(church => {
                 const option = document.createElement('option');
                 option.value = `${church.name} ${church.city}`;
                 option.dataset.value = church.id;
-                dataList.appendChild(option);
+                churchDataList.appendChild(option);
             });
-            dataList.classList.remove('d-none');
+            churchDataList.classList.remove('d-none');
         } else {
-            errorMsg.classList.remove('d-none');
-            dataList.classList.add('d-none');
+            churchErrorMsg.classList.remove('d-none');
+            churchDataList.classList.add('d-none');
         }
     })
 
